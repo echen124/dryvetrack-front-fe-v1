@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Barlow', sans-serif;
+}
+
+.link-style {
+  color: white;
+  text-decoration: none;
+}
+
+.link-logo {
+  text-decoration: none;
+  color: orange;
+}
