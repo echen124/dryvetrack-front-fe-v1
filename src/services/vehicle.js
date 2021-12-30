@@ -5,6 +5,11 @@ const security = {
     headers: { 'x-auth-token': sessionStorage.getItem('x-auth-token') }
 }
 
+const decodeVIN = (vin) => {
+    const request = axios.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
+    return request.then(response => response.data)
+}
+
 const getAllVehicles = () => {
 
     const request = axios.get(baseUrl + '/vehicle-info', security)
@@ -38,7 +43,7 @@ const updateVehicle = (id, obj, userId) => {
 }
 
 const deleteVehicle = (userId, obj) => {
-    const request = axios.put(baseUrl + '/delete-vehicle', {userId, obj}, security )
+    const request = axios.put(baseUrl + '/delete-vehicle', { userId, obj }, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -49,4 +54,4 @@ const deleteVehicle = (userId, obj) => {
 
 
 
-export { getAllVehicles, addVehicle, updateVehicle, deleteVehicle }
+export { getAllVehicles, addVehicle, updateVehicle, deleteVehicle, decodeVIN }
