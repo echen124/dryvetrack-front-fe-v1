@@ -17,7 +17,7 @@ const Nav = ({ text }) => {
         if (text === "User Dashboard") {
             return (
                 <AddVehicle>
-                    <Link to="/" className='link-style'>{text}</Link>
+                    <Link to="/user-dashboard" className='link-style'>{text}</Link>
                 </AddVehicle>
             )
         }
@@ -30,7 +30,18 @@ const Nav = ({ text }) => {
             )
         }
 
-
+        if (text === "Login" || text === "Register") {
+            return (
+                <div>
+                    <AddVehicle>
+                        <Link to="/" className='link-style'>Get Started</Link>
+                    </AddVehicle>
+                    <AddVehicle>
+                        <Link to="/" className='link-style'>Login</Link>
+                    </AddVehicle>
+                </div>
+            )
+        }
     }
 
     return (
@@ -39,13 +50,7 @@ const Nav = ({ text }) => {
                 <Link to="/" className='link-logo'>VehicleTrack</Link>
             </LogoContainer>
             <ButtonContainer>
-                {/* {changeWindowLocation()} */}
-                <AddVehicle>
-                    <Link to="/" className='link-style'>Get Started</Link>
-                </AddVehicle>
-                <AddVehicle>
-                    <Link to="/" className='link-style'>Login</Link>
-                </AddVehicle>
+                {changeWindowLocation()}
             </ButtonContainer>
         </Container>
     )

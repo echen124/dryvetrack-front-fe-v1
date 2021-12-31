@@ -4,7 +4,7 @@ import { Container } from '../styling/VehicleList'
 
 
 const VehicleList = ({vehicleList, deleteSingleVehicle}) => {
-     
+    //console.log(vehicleList)
     return (
         <Container>
            {vehicleList.map(data => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import {Container, Title, Description, DescriptionText, Test} from '../styling/Welcome'
 
-const Welcome = ({totalVehicles, totalKilometers}) => {
+const Welcome = ({totalVehicles, totalKilometers, name}) => {
     return (
         <Container>
             <Test>
-                <Title>Welcome To VehicleTrack</Title>
+                <Title>Welcome Back To VehicleTrack <br></br> {name}</Title>
                 <Description>
                     <DescriptionText>
                         Here are the vehicles you are tracking maintenance for. Add new ones at any time!
