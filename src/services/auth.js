@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/auth'
+const baseUrl = 'http://localhost:3001/auth'
 
 const login = (obj) => {
     const request = axios.post(baseUrl + "/login", obj)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/api'
+const baseUrl = 'http://localhost:3001/api'
 
 const security = {
     headers: { 'x-auth-token': sessionStorage.getItem('x-auth-token') }
@@ -10,9 +10,15 @@ const decodeVIN = (vin) => {
     return request.then(response => response.data)
 }
 
-const getAllVehicles = () => {
-
-    const request = axios.get(baseUrl + '/vehicle-info', security)
+const getAllVehicles = (id) => {
+    const request = axios.get(baseUrl + '/vehicle-info', {
+        headers: {
+            'x-auth-token': sessionStorage.getItem('x-auth-token')
+        },
+        params: {
+            'key': id
+        }
+    })
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -21,8 +27,8 @@ const getAllVehicles = () => {
     }
 }
 
-const addVehicle = (obj) => {
-    const request = axios.post(baseUrl + '/add-vehicle', obj, security)
+const addVehicle = (obj, id) => {
+    const request = axios.post(baseUrl + '/add-vehicle', {obj, id}, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -32,7 +38,6 @@ const addVehicle = (obj) => {
 }
 
 const updateVehicle = (id, obj, userId) => {
-    console.log(id)
     const request = axios.put(baseUrl + `/update-vehicle/${id}`, { obj, userId }, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
