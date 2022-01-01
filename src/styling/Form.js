@@ -2,33 +2,28 @@ import styled from 'styled-components';
 import { Info } from '@material-ui/icons';
 
 const Container = styled.div`
+background-color: #264653;
+height: 100vh;
+`
+
+const TestContainer = styled.div`
 display: flex;
 justify-content: center;
-background-color: #264653;
-height 70vh;
-
-@media (min-width: 768px) {
-    height: 70vh;
-}
-
+padding-top: 1em;
 `
 
 const VehicleDetailForm = styled.form`
-margin: 1em;
+width: auto;
 padding: 1em;
+margin: 0em 1em 0em 1em;
 border-radius: 1em;
 text-align: center;
 background-color: white;
-height: 50vh;
+height: 90vh;
 
-@media (min-width: 768px) {
-    height: 40vh;
-}
 `
 
 const FormContainer = styled.div`
-margin: 0em;
-padding: 0em;
 `
 
 const TitleContainer = styled.div`
@@ -56,6 +51,7 @@ const Label = styled.label`
 `
 
 const Input = styled.input`
+margin-bottom: 0.5em;
 width: 100%;
 `
 
@@ -63,6 +59,7 @@ const ButtonContainer = styled.div`
 display: flex;
 justify-content: center;
 margin-top: 0.5em;
+margin-bottom: 0.5em;
 `
 
 const Button = styled.button`
@@ -76,5 +73,37 @@ font-size: 15px;
 font-family: 'PT Sans', sans-serif;
 cursor: pointer;
 `
-export { Container, VehicleDetailForm, FormContainer, TitleContainer, Title, Description, DescriptionText, Label, Input, ButtonContainer, Button, Info }
+
+const ConfirmContainer = styled.div`
+    border: 1px solid black;
+    border-radius: 1em;
+    margin-top: 1em;
+    `
+
+const TopConfirm = styled.div``
+
+const TopTitle = styled.h2``
+
+const TopDetail = styled.p``
+
+const MiddleConfirm = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    `
+
+const BottomConfirm = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    `
+
+const DetailContainer = styled.div``
+
+const DetailTitle = styled.h3``
+
+const DetailDescription = styled.p`
+margin: 0em;
+padding: 0em;
+`
+
+export { Container, VehicleDetailForm, FormContainer, TitleContainer, Title, Description, DescriptionText, Label, Input, ButtonContainer, Button, Info, TestContainer, ConfirmContainer, TopConfirm, TopTitle, TopDetail, MiddleConfirm, BottomConfirm, DetailContainer, DetailTitle, DetailDescription }
 
