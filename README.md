@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# [View The Live Site For VehicleTrack!](https://vehicle--track.herokuapp.com/)  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./imgs/home-page.PNG" />
 
-## Available Scripts
+* <b>Please note! This website is hosted on Heroku. Please give a few seconds for the website to load!</b>
 
-In the project directory, you can run:
+***
 
-### `npm start`
+## Brief Description
+**Welcome to VehicleTrack, a mobile-responsive and easy to use web application to track vehicle maintenance! This project uses the MERN stack.**
+***
+## User Story
+**Business owners and logistic companies need a way of tracking their vehicles to prolong their investments. This applications tracks vehicles, mileage, warranty information and oil life to mantain vehicular upkeep.**
+***
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of Contents
+1. [Technology Used](#technology-used)
+2. [Installations](#installations)
+3. [Feature Code](#feature-code)
+4. [Future Implementations](#future-implementations)
+***
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+* MongoDB
+* Express
+* React
+* Node
+* [NHTSA Vehicle API](https://vpic.nhtsa.dot.gov/api/)
+* Styled Components
+* Heroku
+* MongoDB Atlas
+* React Router
+***
 
-### `npm test`
+## Installations
+```
+npm axios
+npm date-fns
+npm moment
+npm react-dom
+npm react-router-dom
+npm express
+npm cors
+npm dotenv
+npm mongoose
+npm nodemon
+```
+***
+## Feature Code
+![](./imgs/add-vehicle.gif)
+* Inputting the vehicle identification number (VIN) sends a GET request to the [NHTSA API](https://vpic.nhtsa.dot.gov/api/)  and the vehicle make, model and year are decoded from it. Every vehicle has a unique VIN so this makes identifying any vehicle easy. User confirmation ensures that the vehicle information is correct before submission.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="./imgs/vehicle-card.PNG">
 
-### `npm run build`
+* After user confirmation, RESTful API commands pulls all the vehicle information from MongoDB and JS map functions create individual vehicle information cards. From here, the user can either delete or track the information of each vehicle.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](./imgs/vehicle-status.gif)
+* When the user updates the mileage, the date of the update is automatically determined and stored to MongoDB. The history mileage is also called from MongoDB to allow the user to view the mileage progression.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* When the user adds an oil change record, the oil life gets initialized to 100% and every mileage update calculates the oil life based on the oil change interval. After the current mileage exceeds the interval, the user is recommended to change the oil. This also updates the mileage tracker.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+***
 
-### `npm run eject`
+## Future Implementations
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* User authentication
+* Mapbox location tracking
+* Dark/Light Mode
