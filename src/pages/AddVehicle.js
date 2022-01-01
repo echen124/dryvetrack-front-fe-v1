@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Form from '../components/Form';
-import VehicleFormConfirm from '../components/VehicleFormConfirm';
 import Footer from '../components/Footer';
 import { getAllVehicles, decodeVIN } from '../services/vehicle';
 import moment from 'moment';
@@ -132,8 +131,7 @@ const AddVehicle = () => {
     return (
         <Container>
             <Nav text="User Dashboard" />
-            <Form enterVehicleDetail={enterVehicleDetail} handleVin={handleVin} vin={vin} handlePlateNum={handlePlateNum} plateNumber={plateNumber} handleColor={handleColor} color={color} handleInsuranceDate={handleInsuranceDate} date={date} />
-            <VehicleFormConfirm vehicleType={vehicleType} primaryInfo={primaryInfo} make={make} model={model} modelYear={modelYear} allVehicles={allVehicles} />
+            <Form enterVehicleDetail={enterVehicleDetail} handleVin={handleVin} vin={vin} handlePlateNum={handlePlateNum} plateNumber={plateNumber} handleColor={handleColor} color={color} handleInsuranceDate={handleInsuranceDate} date={date} vehicleType={vehicleType} primaryInfo={primaryInfo} make={make} model={model} modelYear={modelYear} allVehicles={allVehicles} />
             <Footer />
         </Container>
     )
