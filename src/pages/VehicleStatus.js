@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Nav from '../components/Nav';
 import VehicleStatusBody from '../components/VehicleStatusBody';
 import Footer from '../components/Footer';
-import { getVehicle } from '../services/vehicle';
+import { getAllVehicles } from '../services/vehicle';
+// import { getVehicle } from '../services/vehicle';
 
 
 const Container = styled.div``
@@ -11,11 +12,18 @@ const Container = styled.div``
 
 const VehicleStatus = () => {
     const [vehicleInfo, setVehicleInfo] = useState([])
+    const [individualVehicle, setIndivdualVehicle] = useState({})
+    const id = window.location.hash.substring(17, window.location.hash.length)
 
     useEffect(() => {
-        getVehicle(window.location.hash.substring(17, window.location.hash.length).toString())
+        getAllVehicles(sessionStorage.getItem('userKey'))
             .then(data => {
-                setVehicleInfo(data)
+                data.data.data.vehicleInfo.forEach(d => {
+                    if (d.id === id) {
+                        setIndivdualVehicle(d)
+                    }
+                })
+                setVehicleInfo(data.data.data.vehicleInfo)
             })
     }, [])
 
@@ -23,7 +31,7 @@ const VehicleStatus = () => {
     return (
         <Container>
             <Nav text="User Dashboard" />
-            <VehicleStatusBody vehicleInfo = {vehicleInfo} />
+            <VehicleStatusBody individualVehicle={individualVehicle} vehicleInfo={vehicleInfo} />
             <Footer />
         </Container>
     )

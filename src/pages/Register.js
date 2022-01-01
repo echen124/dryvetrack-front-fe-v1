@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
-import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser } from "../styling/Register"
+import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText } from "../styling/Register"
 import { signup } from '../services/auth';
 
 
@@ -16,8 +16,8 @@ const Register = () => {
         e.preventDefault()
         signup({ firstName, lastName, email, password }).then(d => {
             if (d.msg) {
-                console.log(d.msg);
-                setErrorMsg(d.msg);
+                //console.log(d.msg[0]);
+                setErrorMsg([d.msg[0], d.msg[1]]);
             } else {
                 setErrorMsg("successfully registered")
                 window.location.href = "#/login"
@@ -65,11 +65,13 @@ const Register = () => {
                     <TopForm>
                         <FormLabel>Password</FormLabel>
                         <br></br>
-                        <FormInput type="text" value={password} onChange={handlePassword}></FormInput>
+                        <FormInput type="password" value={password} onChange={handlePassword}></FormInput>
                     </TopForm>
-
                     <AddUser>Create Account</AddUser>
-
+                    <ErrorContainer>
+                        <ErrorText>{errorMsg[0]}</ErrorText>
+                        <ErrorText>{errorMsg[1]}</ErrorText>
+                    </ErrorContainer>
                 </Form>
             </FormContainer>
             <Footer></Footer>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { login } from '../services/auth';
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
-import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser } from "../styling/Login"
+import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText } from "../styling/Login"
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -44,10 +44,14 @@ const Login = () => {
                     <TopForm>
                         <FormLabel>Password</FormLabel>
                         <br></br>
-                        <FormInput type="text" value={password} onChange={handlePassword}></FormInput>
+                        <FormInput type="password" value={password} onChange={handlePassword}></FormInput>
                     </TopForm>
                     <AddUser>Login</AddUser>
-                    {errorMsg}
+                    <ErrorContainer>
+                        <ErrorText>
+                            {errorMsg}
+                        </ErrorText>
+                    </ErrorContainer>
                 </Form>
             </FormContainer>
             <Footer></Footer>
