@@ -20,8 +20,8 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
         }
 
         allVehicles.push(finalVehObj)
-
-        addVehicle(allVehicles, sessionStorage.getItem('userKey')).then(d => console.log(d))
+        addVehicle(allVehicles, sessionStorage.getItem('userKey'))
+        window.location.hash = "#/user-dashboard"
     }
 
     return (
@@ -84,9 +84,7 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
                             </DetailContainer>
                         </BottomConfirm>
                         <ButtonContainer>
-                            <Link to="/user-dashboard">
-                                <Button onClick={confirmVehicle}>Enter Vehicle</Button>
-                            </Link>
+                            <Button onClick={confirmVehicle}>Enter Vehicle</Button>
                         </ButtonContainer>
                     </ConfirmContainer>
                 </VehicleDetailForm>
