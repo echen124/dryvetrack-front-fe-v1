@@ -5,7 +5,7 @@ const Welcome = ({totalVehicles, totalKilometers, name}) => {
     return (
         <Container>
             <Test>
-                <Title>Welcome Back To VehicleTrack <br></br> {name}</Title>
+                <Title>Welcome Back To DryveTrack <br></br> {name}</Title>
                 <Description>
                     <DescriptionText>
                         Here are the vehicles you are tracking maintenance for. Add new ones at any time!

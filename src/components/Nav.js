@@ -30,7 +30,7 @@ const Nav = ({ text }) => {
             )
         }
 
-        if (text === "Login" || text === "Register" || window.location.hash === "#/") {
+        if (text === "Login" || text === "Register" || window.location.hash === "#/" || window.location.hash === "") {
             return (
                 <div>
                     <AddVehicle>
@@ -62,13 +62,13 @@ const Nav = ({ text }) => {
         if (window.location.hash === "#/user-dashboard" || window.location.hash === "#/add-vehicle" || window.location.hash.substring(0, 16) === "#/vehicle-status") {
             return (
                 <LogoContainer>
-                    <Link to="/user-dashboard" className='link-logo'>VehicleTrack</Link>
+                    <Link to="/user-dashboard" className='link-logo'>DryveTrack</Link>
                 </LogoContainer>
             )
         } else {
             return (
                 <LogoContainer>
-                    <Link to="/" className='link-logo'>VehicleTrack</Link>
+                    <Link to="/" className='link-logo'>DryveTrack</Link>
                 </LogoContainer>
             )
         }
