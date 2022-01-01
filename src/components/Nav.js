@@ -30,27 +30,59 @@ const Nav = ({ text }) => {
             )
         }
 
-        if (text === "Login" || text === "Register") {
+        if (text === "Login" || text === "Register" || window.location.hash === "#/") {
             return (
                 <div>
                     <AddVehicle>
-                        <Link to="/" className='link-style'>Get Started</Link>
+                        <Link to="/register" className='link-style'>Get Started</Link>
                     </AddVehicle>
                     <AddVehicle>
-                        <Link to="/" className='link-style'>Login</Link>
+                        <Link to="/login" className='link-style'>Login</Link>
                     </AddVehicle>
                 </div>
             )
         }
     }
 
+    const LogoutButton = () => {
+        if (text === "Add Vehicle") {
+            return (
+                <AddVehicle onClick={() => logout()}>
+                    <Link to="/" className='link-style'>Logout</Link>
+                </AddVehicle>
+            )
+        }
+    }
+
+    const logout = () => {
+        sessionStorage.clear();
+    }
+
+    const LogoLink = () => {
+        if (window.location.hash === "#/user-dashboard" || window.location.hash === "#/add-vehicle" || window.location.hash.substring(0, 16) === "#/vehicle-status") {
+            return (
+                <LogoContainer>
+                    <Link to="/user-dashboard" className='link-logo'>VehicleTrack</Link>
+                </LogoContainer>
+            )
+        } else {
+            return (
+                <LogoContainer>
+                    <Link to="/" className='link-logo'>VehicleTrack</Link>
+                </LogoContainer>
+            )
+        }
+    }
+
     return (
         <Container>
-            <LogoContainer>
+            {/* <LogoContainer>
                 <Link to="/" className='link-logo'>VehicleTrack</Link>
-            </LogoContainer>
+            </LogoContainer> */}
+            {LogoLink()}
             <ButtonContainer>
                 {changeWindowLocation()}
+                {LogoutButton()}
             </ButtonContainer>
         </Container>
     )

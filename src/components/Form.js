@@ -32,7 +32,7 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
 
                 <ButtonContainer>
                     <Button>
-                        <Link to="/" className='link-style'>Cancel</Link>
+                        <Link to="/user-dashboard" className='link-style'>Cancel</Link>
                     </Button>
                     <Button>Submit</Button>
                 </ButtonContainer>

@@ -4,6 +4,10 @@ import { Container, Title, VehicleContainer, LogoContainer, Logo, ButtonContaine
 
 const VehicleCard = ({ data, deleteSingleVehicle }) => {
 
+    const test = () => {
+        window.location = `/#/vehicle-status/${data.id}`
+    }
+
     return (
         <Container>
             <VehicleContainer>
@@ -16,10 +20,8 @@ const VehicleCard = ({ data, deleteSingleVehicle }) => {
                     </Logo>
                 </LogoContainer>
                 <ButtonContainer>
-                    <Maintenance>
-                        <Link to={`vehicle-status/${data.id}`} className='link-style'>
-                            Track Maintenance
-                        </Link>
+                    <Maintenance onClick={() => test()}>
+                        Track Maintenance
                     </Maintenance>
                     <Delete onClick={deleteSingleVehicle} id={data.id}>Delete</Delete>
                 </ButtonContainer>

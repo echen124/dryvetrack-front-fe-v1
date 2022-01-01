@@ -1,14 +1,15 @@
 import React from 'react';
 import VehicleDetails from './VehicleDetails';
 import VehicleStatusInfo from './VehicleStatusInfo';
-import {Container} from '../styling/VehicleStatusBody'
+import { Container } from '../styling/VehicleStatusBody'
 
 
-const VehicleStatusBody = ( {vehicleInfo} ) => {
-    return(
+const VehicleStatusBody = ({ individualVehicle, vehicleInfo }) => {
+    //console.log(individualVehicle)
+    return (
         <Container>
-            <VehicleDetails year={vehicleInfo.modelYear} make = {vehicleInfo.make} model = {vehicleInfo.model} color = {vehicleInfo.color} plate = {vehicleInfo.plateNumber} vin = {vehicleInfo.vin} />
-            <VehicleStatusInfo data={vehicleInfo} />
+            <VehicleDetails year={individualVehicle.modelYear} make = {individualVehicle.make} model = {individualVehicle.model} color = {individualVehicle.color} plate = {individualVehicle.plateNumber} vin = {individualVehicle.vin} />
+            <VehicleStatusInfo data={individualVehicle} vehicleInfo={vehicleInfo} />
         </Container>
     )
 }

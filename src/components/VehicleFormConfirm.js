@@ -65,7 +65,7 @@ const VehicleFormConfirm = ({ vehicleType, primaryInfo, make, model, modelYear, 
                         </Bottom>
                     </VehicleDetail>
                     <ButtonContainer>
-                        <Link to="/">
+                        <Link to="/user-dashboard">
                             <Button onClick={confirmVehicle}>Enter Vehicle</Button>
                         </Link>
                     </ButtonContainer>
