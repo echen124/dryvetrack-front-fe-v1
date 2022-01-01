@@ -18,9 +18,9 @@ const Form = styled.form`
 border: 1px solid black;
 width: 100%;
 text-align: center;
-margin: 4em;
+margin-top: 1em;
 background-color: #feefdd;
-height: 55vh;
+height: 65vh;
 
 @media (min-width: 768px) {
     width: 40%;
@@ -53,6 +53,19 @@ font-weight: 600;
 font-size: 15px;
 font-family: 'PT Sans', sans-serif;
 margin-bottom: 1em;
+cursor: pointer;
 `
 
-export {Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser}
+const ErrorContainer = styled.div`
+&:hover {
+   background:color: white;
+}
+`
+
+const ErrorText = styled.p`
+font-size: 17px;
+margin: 0;
+padding: 0;
+`
+
+export { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText }

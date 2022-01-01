@@ -22,7 +22,7 @@ background-color: white;
 height: 50vh;
 
 @media (min-width: 768px) {
-    height: 35vh;
+    height: 40vh;
 }
 `
 

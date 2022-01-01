@@ -53,5 +53,14 @@ font-weight: 600;
 font-size: 15px;
 font-family: 'PT Sans', sans-serif;
 margin-bottom: 1em;
+cursor: pointer;
 `
-export {Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser}
+
+const ErrorContainer = styled.div``
+
+const ErrorText = styled.p`
+color: white;
+font-size: 20px;
+`
+
+export {Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText}

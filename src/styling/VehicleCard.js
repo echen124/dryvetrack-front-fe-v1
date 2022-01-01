@@ -51,6 +51,7 @@ font-family: 'PT Sans', sans-serif;
 margin: 10px;
 flex:1;
 text-decoration: none;
+cursor: pointer;
 `
 
 const Delete = styled.button`
