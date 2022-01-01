@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api'
+const baseUrl = '/api'
 
 const security = {
     headers: { 'x-auth-token': sessionStorage.getItem('x-auth-token') }
