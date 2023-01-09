@@ -1,13 +1,17 @@
-# [View The Live Site For DryveTrack!](https://dryvetrack.herokuapp.com/#/)  
+# [~~View The Live Site For DryveTrack!~~]() 
+## Edit: DryveTrack is no longer hosted on Heroku since they removed their free tier! The application will have to be run locally. Once I learn how to setup a CI/CD pipeline, I'll host it on another platform.
 
+***
 <img src="./imgs/home-page.PNG" />
-
-* <b>Please note! This website is hosted on Heroku. Please give a few seconds for the website to load!</b>
 
 ***
 
 ## Brief Description
-Welcome to VehicleTrack, an easy to use web application to track vehicle maintenance! This project builds off of [FleetCare](https://github.com/echen12/FleetCare) which was the first version of this application. Improvements that have been made since [FleetCare](https://github.com/echen12/FleetCare) include user authentication, and a fully redesigned and responsive UI.
+Welcome to DryveTrack, an easy to use web application to track vehicle maintenance! This project builds off of [FleetCare](https://github.com/echen12/FleetCare) which was the first version of this application. Improvements that have been made since [FleetCare](https://github.com/echen12/FleetCare) include user authentication, and a fully redesigned and responsive UI.
+
+Edit v1: More improvements have been made to DryveTrack! When I first made this application back in 2021, I created the backend with Node.js because that was what I was familiar with at the time. After a year of learning more technologies, I recently re-wrote the backend using ASP.Net 6 using a Model View Service (MVS) architecture which you can view [here](https://github.com/echen12/DryveTrack_BackEnd). At this time, I removed the Mileage Tracker component as I'm in the process of improving how oil change intervals are calculated. Otherwise, this application is fully functional.
+
+
 ***
 ## User Story
 **Business owners and logistic companies need a way of tracking their vehicles to prolong their investments. This application tracks vehicles, mileage, warranty information and oil life to mantain vehicular upkeep.**
@@ -18,6 +22,11 @@ Welcome to VehicleTrack, an easy to use web application to track vehicle mainten
 2. [Installations](#installations)
 3. [Feature Code](#feature-code)
 4. [Future Implementations](#future-implementations)
+***
+
+## How to Run
+1) Ensure you have Visual Studio, Microsoft SQL Server Management Studio and a SQL server running. Then, clone the backend [here](https://github.com/echen12/DryveTrack_BackEnd) and follow the instructions there to run the solution.
+2) Clone this project and run ``` npm ``` to install the required dependencies. ``` npm start ``` starts the front end.
 ***
 
 ## Technologies Used
