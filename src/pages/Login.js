@@ -5,25 +5,25 @@ import Footer from "../components/Footer"
 import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText } from "../styling/Login"
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
     const submitForm = (e) => {
         e.preventDefault();
-        login({ email, password }).then(d => {
+        login({ userName, password }).then(d => {
             if (d.msg) {
                 setErrorMsg(d.msg)
             } else {
                 sessionStorage.setItem('x-auth-token', d.data.token)
-                sessionStorage.setItem('userKey', d.data.id)
+                sessionStorage.setItem('userKey', d.data.userId)
                 window.location.href = "#/user-dashboard"
             }
         })
     }
 
-    const handleEmail = (e) => {
-        setEmail(e.target.value);
+    const handleUserName = (e) => {
+        setUserName(e.target.value);
     }
 
     const handlePassword = (e) => {
@@ -37,9 +37,9 @@ const Login = () => {
                 <Form onSubmit={submitForm}>
                     <FormTitle>Login</FormTitle>
                     <TopForm>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Username</FormLabel>
                         <br></br>
-                        <FormInput type="text" value={email} onChange={handleEmail}></FormInput>
+                        <FormInput type="text" value={userName} onChange={handleUserName}></FormInput>
                     </TopForm>
                     <TopForm>
                         <FormLabel>Password</FormLabel>

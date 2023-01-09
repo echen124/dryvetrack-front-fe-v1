@@ -1,28 +1,32 @@
 import React, { useState } from 'react'
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
-import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText } from "../styling/Register"
+import ErrorContainer from '../components/ErrorContainer'
+import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser,  ErrorText } from "../styling/Register"
 import { signup } from '../services/auth';
 
 
 const Register = () => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
+    const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState([]);
 
     const submitForm = (e) => {
         e.preventDefault()
-        signup({ firstName, lastName, email, password }).then(d => {
-            if (d.msg) {
-                //console.log(d.msg[0]);
-                setErrorMsg([d.msg[0], d.msg[1]]);
-            } else {
-                setErrorMsg("successfully registered")
-                window.location.href = "#/login"
-            }
-        })
+        signup({ firstName, lastName, email, password, userName })
+            .then(d => {
+                if (d.status === 201) {
+                    setErrorMsg("successfully registered")
+                    window.location.href = "#/login"
+                } else {
+                    setErrorMsg(d)
+                    console.log(d)
+                    console.log(errorMsg)
+                }
+            })
     }
 
     const handleFirstName = (e) => {
@@ -39,6 +43,10 @@ const Register = () => {
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
+    }
+
+    const handleUsername = (e) => {
+        setUserName(e.target.value);
     }
 
     return (
@@ -63,15 +71,17 @@ const Register = () => {
                         <FormInput type="text" value={email} onChange={handleEmail}></FormInput>
                     </TopForm>
                     <TopForm>
+                        <FormLabel>Username</FormLabel>
+                        <br></br>
+                        <FormInput type="text" value={userName} onChange={handleUsername}></FormInput>
+                    </TopForm>
+                    <TopForm>
                         <FormLabel>Password</FormLabel>
                         <br></br>
                         <FormInput type="password" value={password} onChange={handlePassword}></FormInput>
                     </TopForm>
                     <AddUser>Create Account</AddUser>
-                    <ErrorContainer>
-                        <ErrorText>{errorMsg[0]}</ErrorText>
-                        <ErrorText>{errorMsg[1]}</ErrorText>
-                    </ErrorContainer>
+                    {/* <ErrorContainer errors={errorMsg} /> */}
                 </Form>
             </FormContainer>
             <Footer></Footer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, VehicleDetailForm, FormContainer, TitleContainer, Title, Description, DescriptionText, Label, Input, ButtonContainer, Button, TestContainer, ConfirmContainer, TopConfirm, TopTitle, TopDetail, MiddleConfirm, BottomConfirm, DetailContainer, DetailTitle, DetailDescription } from '../styling/Form'
 import { Link } from "react-router-dom";
-import { addVehicle } from '../services/vehicle';
+import { addVehicleByOwner } from '../services/vehicle';
 
 const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber, handleColor, color, handleInsuranceDate, date, vehicleType, primaryInfo, make, model, modelYear, allVehicles }) => {
 
@@ -19,8 +19,15 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
             ...primaryInfo
         }
 
-        allVehicles.push(finalVehObj)
-        addVehicle(allVehicles, sessionStorage.getItem('userKey'))
+        console.log(finalVehObj)
+
+        addVehicleByOwner(finalVehObj, sessionStorage.getItem('userKey'))
+            .then(d => {
+                console.log(d)
+            })
+
+        // allVehicles.push(finalVehObj)
+        // addVehicle(allVehicles, sessionStorage.getItem('userKey'))
         window.location.hash = "#/user-dashboard"
     }
 

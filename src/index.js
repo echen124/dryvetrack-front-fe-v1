@@ -14,7 +14,7 @@ import {
 } from "react-router-dom";
 
 ReactDOM.render(
-  <HashRouter basename="/">
+  <HashRouter>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="login" element={<Login />} />

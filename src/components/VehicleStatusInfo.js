@@ -11,7 +11,7 @@ const VehicleStatusInfo = ( {data, vehicleInfo} ) => {
     return(
         <Container>
             <InsuranceTracker data={data} vehicleInfo={vehicleInfo} />
-            <MileageTracker data={data} vehicleInfo={vehicleInfo} />
+            {/* <MileageTracker data={data} vehicleInfo={vehicleInfo} /> */}
             <Warranty data={data} vehicleInfo={vehicleInfo} />
         </Container>
     )

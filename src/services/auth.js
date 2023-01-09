@@ -2,7 +2,7 @@ import axios from 'axios'
 const baseUrl = '/auth'
 
 const login = (obj) => {
-    const request = axios.post(baseUrl + "/login", obj)
+    const request = axios.post("https://localhost:7298/api/Auth/BearerToken", obj)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -12,8 +12,7 @@ const login = (obj) => {
 }
 
 const signup = (obj) => {
-    const request = axios.post(baseUrl + "/signup", obj)
-
+    const request = axios.post("https://localhost:7298/api/Auth/add-user", obj)
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
     } else {

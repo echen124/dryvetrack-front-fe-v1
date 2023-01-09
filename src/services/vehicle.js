@@ -11,12 +11,9 @@ const decodeVIN = (vin) => {
 }
 
 const getAllVehicles = (id) => {
-    const request = axios.get(baseUrl + '/vehicle-info', {
+    const request = axios.get(`https://localhost:7298/api/Vehicle/get-vehicles-by-owner/${id}`, {
         headers: {
             'x-auth-token': sessionStorage.getItem('x-auth-token')
-        },
-        params: {
-            'key': id
         }
     })
 
@@ -27,8 +24,38 @@ const getAllVehicles = (id) => {
     }
 }
 
-const addVehicle = (obj, id) => {
-    const request = axios.post(baseUrl + '/add-vehicle', {obj, id}, security)
+const getVehicleByOwnerAndVin = (user, vin) => {
+    const request = axios.get(`https://localhost:7298/api/Vehicle/get-vehicle-by-owner-vin/${user}/${vin}`)
+
+    if (request.catch(e => e.response.data.length > 0)) {
+        return request.catch(e => e.response.data);
+    } else {
+        return request.then(response => response.data);
+    }
+}
+
+const getInsuranceDetails = (user, vin) => {
+    const request = axios.get(`https://localhost:7298/api/Insurance/get-insurance-by-vehicle-owner/${user}/${vin}`)
+
+    if (request.catch(e => e.response.data.length > 0)) {
+        return request.catch(e => e.response.data);
+    } else {
+        return request.then(response => response.data);
+    }
+}
+
+const addInsuranceDetails = (user, vin, obj) => {
+    const request = axios.post(`https://localhost:7298/api/Insurance/add-insurance-by-vehicle-owner/${user}/${vin}`, obj)
+
+    if (request.catch(e => e.response.data.length > 0)) {
+        return request.catch(e => e.response.data);
+    } else {
+        return request.then(response => response.data);
+    }
+}
+
+const addVehicleByOwner = (obj, id) => {
+    const request = axios.post(`https://localhost:7298/api/Vehicle/add-vehicle-by-owner/${id}`, obj, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -59,4 +86,4 @@ const deleteVehicle = (userId, obj) => {
 
 
 
-export { getAllVehicles, addVehicle, updateVehicle, deleteVehicle, decodeVIN }
+export { getAllVehicles, addVehicleByOwner, updateVehicle, deleteVehicle, decodeVIN, getVehicleByOwnerAndVin, addInsuranceDetails, getInsuranceDetails }

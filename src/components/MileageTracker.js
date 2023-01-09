@@ -15,8 +15,8 @@ const MileageTracker = ({ data, vehicleInfo }) => {
     const [mileageText, setMileageText] = useState("Update Mileage");
     const [oilInterval, setOilInterval] = useState("8000");
     const [mileage, setMileage] = useState(0);
-    const [lastMileage, setLastMileage] = useState("");
-    const [lastUpdated, setLastUpdated] = useState("");
+    const [lastMileage, setLastMileage] = useState("1");
+    const [lastUpdated, setLastUpdated] = useState("2");
     const [mileageList, setMileageList] = useState([]);
 
     //console.log(data)

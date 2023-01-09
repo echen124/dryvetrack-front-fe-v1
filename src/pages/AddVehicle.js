@@ -71,19 +71,18 @@ const AddVehicle = () => {
                 if (!contains) {
 
                     const newVehicle = {
-                        id: ObjectID().toHexString(),
                         vin: vin,
-                        plateNumber: plateNumber,
-                        insuranceExpiryDate: date,
+                        // plateNumber: plateNumber,
+                        // insuranceExpiryDate: date,
                         color: color,
-                        mileageInformation: [
-                            {
-                                lastUpdated: moment().format('L'),
-                                lastMileage: 0,
-                                oilChangeStartInterval: false
-                            }
-                        ],
-                        warrantyInfo: []
+                        // mileageInformation: [
+                        //     {
+                        //         lastUpdated: moment().format('L'),
+                        //         lastMileage: 0,
+                        //         oilChangeStartInterval: false
+                        //     }
+                        // ],
+                        // warrantyInfo: []
                     }
 
                     decodeVIN(vin)
@@ -97,28 +96,28 @@ const AddVehicle = () => {
                 }
 
                 const newVehicle = {
-                    id: ObjectID().toHexString(),
                     vin: vin,
-                    plateNumber: plateNumber,
-                    insuranceExpiryDate: date,
+                    // plateNumber: plateNumber,
+                    // insuranceExpiryDate: date,
                     color: color,
-                    mileageInformation: [
-                        {
-                            lastUpdated: moment().format('L'),
-                            lastMileage: 0,
-                            oilChangeStartInterval: false
-                        }
-                    ],
-                    warrantyInfo: []
+                    // mileageInformation: [
+                    //     {
+                    //         lastUpdated: moment().format('L'),
+                    //         lastMileage: 0,
+                    //         oilChangeStartInterval: false
+                    //     }
+                    // ],
+                    // warrantyInfo: []
                 }
 
                 decodeVIN(vin)
                     .then(detail => {
+                        console.log(detail)
                         setPrimaryInfo(newVehicle)
-                        setVehicleType(detail.Results[21].Value);
-                        setMake(detail.Results[6].Value);
-                        setModel(detail.Results[8].Value);
-                        setModelYear(detail.Results[9].Value);
+                        setVehicleType(detail.Results[14].Value);
+                        setMake(detail.Results[7].Value);
+                        setModel(detail.Results[9].Value);
+                        setModelYear(detail.Results[10].Value);
                     });
 
             })

@@ -5,7 +5,7 @@ import { Container, Title, VehicleContainer, LogoContainer, Logo, ButtonContaine
 const VehicleCard = ({ data, deleteSingleVehicle }) => {
 
     const test = () => {
-        window.location = `/#/vehicle-status/${data.id}`
+        window.location = `/#/vehicle-status/${data.vin}`
     }
 
     return (

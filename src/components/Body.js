@@ -7,39 +7,44 @@ import { getAllVehicles, deleteVehicle } from '../services/vehicle';
 const Body = () => {
     const [vehicleList, setVehicleList] = useState([]);
     const [totalKilometers, setTotalKilometers] = useState("");
-    const [totalVehicles, setTotalVehicles] = useState("");
+    const [totalVehicles, setTotalVehicles] = useState(1);
     const [name, setName] = useState("");
 
-    if (vehicleList.length > totalVehicles) {
-        getAllVehicles(sessionStorage.getItem('userKey'))
-            .then(d => {
-                setName(d.data.data.userInfo[0].firstName)
-                let totalKM = 0;
-                for (let i = 0; i < d.data.data.vehicleInfo.length; i++) {
-                    let individual = d.data.data.vehicleInfo[i].mileageInformation;
-                    totalKM += Number(individual[individual.length - 1].lastMileage);
-                }
-                setTotalKilometers(totalKM);
-                setVehicleList(d.data.data.vehicleInfo);
-                setTotalVehicles(d.data.data.vehicleInfo.length);
-            })
-    }
+    // if (vehicleList.length > totalVehicles) {
+    //     getAllVehicles(sessionStorage.getItem('userKey'))
+    //         .then(d => {
+    //             console.log(d)
+    //             setName(d.data.data.userInfo[0].firstName)
+    //             let totalKM = 0;
+    //             for (let i = 0; i < d.data.data.vehicleInfo.length; i++) {
+    //                 let individual = d.data.data.vehicleInfo[i].mileageInformation;
+    //                 totalKM += Number(individual[individual.length - 1].lastMileage);
+    //             }
+    //             setTotalKilometers(totalKM);
+    //             setVehicleList(d.data.data.vehicleInfo);
+    //             setTotalVehicles(d.data.data.vehicleInfo.length);
+    //         })
+    // }
 
     useEffect(() => {
         getAllVehicles(sessionStorage.getItem('userKey'))
             .then(d => {
+                console.log(d)
                 //console.log(d.data.data.vehicleInfo)
-                setName(d.data.data.userInfo[0].firstName)
-                let totalKM = 0;
-                for (let i = 0; i < d.data.data.vehicleInfo.length; i++) {
-                    let individual = d.data.data.vehicleInfo[i].mileageInformation;
-                    totalKM += Number(individual[individual.length - 1].lastMileage);
-                }
-                setTotalKilometers(totalKM);
-                setVehicleList(d.data.data.vehicleInfo);
-                setTotalVehicles(d.data.data.vehicleInfo.length);
+                // setName(d.data.data.userInfo[0].firstName)
+                // let totalKM = 0;
+                // for (let i = 0; i < d.data.length; i++) {
+                //     let individual = d.data[i].odometer
+                //     console.log(individual)
+                //     totalKM += individual
+                // }
+                // setTotalKilometers(totalKM);
+                setVehicleList(d.data);
+                setTotalVehicles(d.data.length);
             })
     }, []);
+
+
 
     //console.log(window.location.hash)
 
