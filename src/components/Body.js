@@ -7,7 +7,9 @@ import { getAllVehicles, deleteVehicle } from '../services/vehicle';
 const Body = () => {
     const [vehicleList, setVehicleList] = useState([]);
     const [totalKilometers, setTotalKilometers] = useState("");
-    const [totalVehicles, setTotalVehicles] = useState(1);
+    const [totalVehicles, setTotalVehicles] = useState(0);
+    const [vehicleIdToDelete, setVehicleIdToDelete] = useState("")
+    const [toDelete, setToDelete] = useState(false)
     const [name, setName] = useState("");
 
     // if (vehicleList.length > totalVehicles) {
@@ -27,9 +29,9 @@ const Body = () => {
     // }
 
     useEffect(() => {
-        getAllVehicles(sessionStorage.getItem('userKey'))
-            .then(d => {
-                console.log(d)
+        getAllVehicles()
+            .then(response => {
+                console.log(response.data)
                 //console.log(d.data.data.vehicleInfo)
                 // setName(d.data.data.userInfo[0].firstName)
                 // let totalKM = 0;
@@ -39,8 +41,8 @@ const Body = () => {
                 //     totalKM += individual
                 // }
                 // setTotalKilometers(totalKM);
-                setVehicleList(d.data);
-                setTotalVehicles(d.data.length);
+                setVehicleList(response.data);
+                setTotalVehicles(response.data.length);
             })
     }, []);
 
@@ -48,18 +50,31 @@ const Body = () => {
 
     //console.log(window.location.hash)
 
+    useEffect(() => {
+        if (toDelete) {
+            deleteVehicle(vehicleIdToDelete)
+                .then(response => {
+                    console.log(response)
+                })
+        }
+        setToDelete(false)
+    }, [toDelete]);
+
 
 
     const deleteSingleVehicle = (e) => {
         let newList = vehicleList.filter(d => d.id !== e.target.id)
         // console.log(newList)
         let filterVeh = vehicleList.filter(p => p.id === e.target.id);
-        let remainingKM = filterVeh[0].mileageInformation[filterVeh[0].mileageInformation.length - 1].lastMileage;
+        //let remainingKM = filterVeh[0].mileageInformation[filterVeh[0].mileageInformation.length - 1].lastMileage;
 
-        setTotalKilometers(totalKilometers - remainingKM);
-        deleteVehicle(sessionStorage.getItem('userKey'), newList);
+        //setTotalKilometers(totalKilometers - remainingKM);
+        //deleteVehicle(sessionStorage.getItem('userKey'), newList);
         setVehicleList(newList);
         setTotalVehicles(newList.length);
+        setVehicleIdToDelete(e.target.id)
+        setToDelete(true)
+        console.log(e)
     }
 
 

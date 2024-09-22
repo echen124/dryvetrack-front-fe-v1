@@ -1,9 +1,13 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Container, VehicleDetailForm, FormContainer, TitleContainer, Title, Description, DescriptionText, Label, Input, ButtonContainer, Button, TestContainer, ConfirmContainer, TopConfirm, TopTitle, TopDetail, MiddleConfirm, BottomConfirm, DetailContainer, DetailTitle, DetailDescription } from '../styling/Form'
 import { Link } from "react-router-dom";
 import { addVehicleByOwner } from '../services/vehicle';
 
-const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber, handleColor, color, handleInsuranceDate, date, vehicleType, primaryInfo, make, model, modelYear, allVehicles }) => {
+const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber, handleColor, color, handleInsuranceDate, date, vehicleType, primaryInfo, make, model, modelYear, allVehicles, handleMileage, mileage, handleInsuranceProvider, insuranceProvider }) => {
+
+    const [enteredVehicle, setEnteredVehicle] = useState(false);
+    const [vehicleObject, setVehicleObject] = useState({});
 
     const confirmVehicle = () => {
 
@@ -11,7 +15,8 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
             make: make,
             model: model,
             modelYear: modelYear,
-            vehicleType: vehicleType
+            vehicleType: vehicleType,
+            mileage: mileage
         }
 
         let finalVehObj = {
@@ -19,16 +24,25 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
             ...primaryInfo
         }
 
-        console.log(finalVehObj)
+        // console.log({ vehicleInfo, primaryInfo })
 
-        addVehicleByOwner(finalVehObj, sessionStorage.getItem('userKey'))
-            .then(d => {
-                console.log(d)
-            })
+        // console.log(finalVehObj)
 
-        // allVehicles.push(finalVehObj)
+        addVehicleByOwner(finalVehObj)
+                .then(response => {
+                    console.log(response.data)
+                    // const date = new Date(response.data.expiryDate);
+                    // const formattedDate = date.toLocaleDateString(); // e.g., "10/11/2024"
+                    // setDisplayExpiryDate(formattedDate)
+                    // setDisplayInsuranceProvider(response.data.provider)
+                    // setLicensePlate(response.data.licensePlate)
+                })
+
+
+        allVehicles.push(finalVehObj)
         // addVehicle(allVehicles, sessionStorage.getItem('userKey'))
         window.location.hash = "#/user-dashboard"
+        window.location.reload();
     }
 
     return (
@@ -53,6 +67,12 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
                         <Label>Color</Label>
                         <br></br>
                         <Input onChange={handleColor} value={color}></Input>
+                        <Label>Current Mileage</Label>
+                        <br></br>
+                        <Input onChange={handleMileage} value={mileage}></Input>
+                        <Label>Insurance Provider</Label>
+                        <br></br>
+                        <Input onChange={handleInsuranceProvider} value={insuranceProvider}></Input>
                         <Label>Insurance Expiry Date</Label>
                         <br></br>
                         <Input type="date" onChange={handleInsuranceDate} value={date}></Input>
