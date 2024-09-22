@@ -6,9 +6,6 @@ import { addVehicleByOwner } from '../services/vehicle';
 
 const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber, handleColor, color, handleInsuranceDate, date, vehicleType, primaryInfo, make, model, modelYear, allVehicles, handleMileage, mileage, handleInsuranceProvider, insuranceProvider }) => {
 
-    const [enteredVehicle, setEnteredVehicle] = useState(false);
-    const [vehicleObject, setVehicleObject] = useState({});
-
     const confirmVehicle = () => {
 
         let vehicleInfo = {
@@ -24,23 +21,13 @@ const Form = ({ enterVehicleDetail, handleVin, vin, handlePlateNum, plateNumber,
             ...primaryInfo
         }
 
-        // console.log({ vehicleInfo, primaryInfo })
-
-        // console.log(finalVehObj)
-
         addVehicleByOwner(finalVehObj)
                 .then(response => {
                     console.log(response.data)
-                    // const date = new Date(response.data.expiryDate);
-                    // const formattedDate = date.toLocaleDateString(); // e.g., "10/11/2024"
-                    // setDisplayExpiryDate(formattedDate)
-                    // setDisplayInsuranceProvider(response.data.provider)
-                    // setLicensePlate(response.data.licensePlate)
                 })
 
 
         allVehicles.push(finalVehObj)
-        // addVehicle(allVehicles, sessionStorage.getItem('userKey'))
         window.location.hash = "#/user-dashboard"
         window.location.reload();
     }
