@@ -11,7 +11,7 @@ const Container = styled.div``
 
 
 const VehicleStatus = () => {
-    const [vehicleInfo, setVehicleInfo] = useState([])
+    const [vehicleInfo, setVehicleInfo] = useState({})
     const [individualVehicle, setIndivdualVehicle] = useState({})
     const id = window.location.hash.substring(17, window.location.hash.length)
 
@@ -28,9 +28,9 @@ const VehicleStatus = () => {
         //         })
         //         setVehicleInfo(data.data.data.vehicleInfo)
         //     })
-        getVehicleByOwnerAndVin(sessionStorage.getItem('userKey'), id)
-            .then(data => {
-                setVehicleInfo(data.data)
+        getVehicleByOwnerAndVin(id)
+            .then(response => {
+                setVehicleInfo(response.data)
             })
     }, [])
 
