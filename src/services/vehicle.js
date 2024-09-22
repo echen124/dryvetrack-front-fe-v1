@@ -2,7 +2,7 @@ import axios from 'axios'
 const baseUrl = '/api'
 
 const security = {
-    headers: { 'x-auth-token': sessionStorage.getItem('x-auth-token') }
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${sessionStorage.getItem('bearer-token')}` }
 }
 
 const decodeVIN = (vin) => {
@@ -10,12 +10,8 @@ const decodeVIN = (vin) => {
     return request.then(response => response.data)
 }
 
-const getAllVehicles = (id) => {
-    const request = axios.get(`https://localhost:7298/api/Vehicle/get-vehicles-by-owner/${id}`, {
-        headers: {
-            'x-auth-token': sessionStorage.getItem('x-auth-token')
-        }
-    })
+const getAllVehicles = () => {
+    const request = axios.get(`https://localhost:7152/api/Car/mycars`, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -24,8 +20,8 @@ const getAllVehicles = (id) => {
     }
 }
 
-const getVehicleByOwnerAndVin = (user, vin) => {
-    const request = axios.get(`https://localhost:7298/api/Vehicle/get-vehicle-by-owner-vin/${user}/${vin}`)
+const getVehicleByOwnerAndVin = (vin) => {
+    const request = axios.get(`https://localhost:7152/api/Car/${vin}`, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -34,8 +30,8 @@ const getVehicleByOwnerAndVin = (user, vin) => {
     }
 }
 
-const getInsuranceDetails = (user, vin) => {
-    const request = axios.get(`https://localhost:7298/api/Insurance/get-insurance-by-vehicle-owner/${user}/${vin}`)
+const updateVehicleMileage = (vin, newMileage) => {
+    const request = axios.put(`https://localhost:7152/api/Car/updateMileage/${vin}`, newMileage, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -44,8 +40,19 @@ const getInsuranceDetails = (user, vin) => {
     }
 }
 
-const addInsuranceDetails = (user, vin, obj) => {
-    const request = axios.post(`https://localhost:7298/api/Insurance/add-insurance-by-vehicle-owner/${user}/${vin}`, obj)
+
+const getInsuranceDetails = (vin) => {
+    const request = axios.get(`https://localhost:7152/api/Insurance/getInsuranceByVin/${vin}`, security)
+
+    if (request.catch(e => e.response.data.length > 0)) {
+        return request.catch(e => e.response.data);
+    } else {
+        return request.then(response => response.data);
+    }
+}
+
+const updateInsuranceDetails = (user, vin, obj) => {
+    const request = axios.put(`https://localhost:7152/api/Insurance/updateInsuranceByVin/${vin}`, obj, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -55,7 +62,7 @@ const addInsuranceDetails = (user, vin, obj) => {
 }
 
 const addVehicleByOwner = (obj, id) => {
-    const request = axios.post(`https://localhost:7298/api/Vehicle/add-vehicle-by-owner/${id}`, obj, security)
+    const request = axios.post(`https://localhost:7152/api/Car/addCar`, obj, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -74,8 +81,8 @@ const updateVehicle = (id, obj, userId) => {
     }
 }
 
-const deleteVehicle = (userId, obj) => {
-    const request = axios.put(baseUrl + '/delete-vehicle', { userId, obj }, security)
+const deleteVehicle = (id) => {
+    const request = axios.delete(`https://localhost:7152/api/Car/delete/${id}`, security)
 
     if (request.catch(e => e.response.data.length > 0)) {
         return request.catch(e => e.response.data);
@@ -86,4 +93,4 @@ const deleteVehicle = (userId, obj) => {
 
 
 
-export { getAllVehicles, addVehicleByOwner, updateVehicle, deleteVehicle, decodeVIN, getVehicleByOwnerAndVin, addInsuranceDetails, getInsuranceDetails }
+export { getAllVehicles, addVehicleByOwner, updateVehicle, deleteVehicle, decodeVIN, getVehicleByOwnerAndVin, updateInsuranceDetails, getInsuranceDetails, updateVehicleMileage}
