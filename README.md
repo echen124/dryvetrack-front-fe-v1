@@ -1,5 +1,5 @@
 # [~~View The Live Site For DryveTrack!~~]() 
-## Edit: DryveTrack is no longer hosted on Heroku since they removed their free tier! The application will have to be run locally. Once I learn how to setup a CI/CD pipeline, I'll host it on another platform. Test Test tefd
+## Edit: DryveTrack is no longer hosted on Heroku since they removed their free tier! The application will have to be run locally. Once I learn how to setup a CI/CD pipeline, I'll host it on another platform. 
 
 ***
 <img src="./imgs/home-page.PNG" />
