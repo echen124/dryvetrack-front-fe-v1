@@ -5,22 +5,28 @@ import Footer from "../components/Footer"
 import { Container, FormContainer, FormTitle, Form, FormInput, FormLabel, TopForm, AddUser, ErrorContainer, ErrorText } from "../styling/Login"
 
 const Login = () => {
-    const [userName, setUserName] = useState("");
+    const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
-        login({ userName, password }).then(d => {
-            if (d.msg) {
-                setErrorMsg(d.msg)
+        try {
+            const d = await login({ username, password });
+            console.log(d);
+            
+            if (d.title) {
+                setErrorMsg(d.title);
             } else {
-                sessionStorage.setItem('x-auth-token', d.data.token)
-                sessionStorage.setItem('userKey', d.data.userId)
-                window.location.href = "#/user-dashboard"
+                sessionStorage.setItem('bearer-token', d.data.token);
+                // sessionStorage.setItem('userKey', d.data.userId);
+                window.location.href = "#/user-dashboard";
             }
-        })
-    }
+        } catch (error) {
+            console.error("Login failed:", error);
+            setErrorMsg("An error occurred during login. Please try again.");
+        }
+    };
 
     const handleUserName = (e) => {
         setUserName(e.target.value);
@@ -39,7 +45,7 @@ const Login = () => {
                     <TopForm>
                         <FormLabel>Username</FormLabel>
                         <br></br>
-                        <FormInput type="text" value={userName} onChange={handleUserName}></FormInput>
+                        <FormInput type="text" value={username} onChange={handleUserName}></FormInput>
                     </TopForm>
                     <TopForm>
                         <FormLabel>Password</FormLabel>
