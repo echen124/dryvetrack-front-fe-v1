@@ -4,7 +4,7 @@ import OilLife from './OilLife';
 import { Container, TitleContainer, TitleText, DescriptionText, MileageContainer, MileageLeft, CurrentMileage, CurrentMileageTitle, LastUpdatedTitle, LastUpdatedText, CurrentMileageText, LastUpdated, MileageRight, MileageTitle, MileageHistory, MileageButtonContainer, MileageButton } from '../styling/MileageTracker'
 import { OilContainer, OilTop, OilBottom, OilTitle, OilSubtitle, OilButtonContainer, OilButton, OilUpdateContainer, OilCurrentMileageContainer, OilInput, OilLabel, OilSelect, OilOption, OilSelectionContainer } from '../styling/OilChangeTracker'
 import moment from 'moment';
-import { getAllVehicles, updateVehicle } from '../services/vehicle';
+import { getAllVehicles, getVehicleByOwnerAndVin, updateVehicle, updateVehicleMileage } from '../services/vehicle';
 // import { getVehicle, updateVehicle } from '../services/vehicle';
 
 
@@ -15,6 +15,7 @@ const MileageTracker = ({ data, vehicleInfo }) => {
     const [mileageText, setMileageText] = useState("Update Mileage");
     const [oilInterval, setOilInterval] = useState("8000");
     const [mileage, setMileage] = useState(0);
+    const [oilIsUpdated, setoilIsUpdated] = useState(false);
     const [lastMileage, setLastMileage] = useState("1");
     const [lastUpdated, setLastUpdated] = useState("2");
     const [mileageList, setMileageList] = useState([]);
@@ -24,22 +25,50 @@ const MileageTracker = ({ data, vehicleInfo }) => {
     const id = window.location.hash.substring(17, window.location.hash.length)
 
     useEffect(() => {
-        getAllVehicles(sessionStorage.getItem('userKey'))
+        getVehicleByOwnerAndVin(id)
             .then(response => {
+                //console.log(response.data.currentMileage)
+                setMileage(response.data.currentMileage)
                 //console.log(response.data.data.vehicleInfo)
-                response.data.data.vehicleInfo.forEach(d => {
-                    //console.log(d.id)
-                    if (d.id === id) {
-                        setLastMileage(d.mileageInformation[d.mileageInformation.length - 1].lastMileage)
-                        setLastUpdated(d.mileageInformation[d.mileageInformation.length - 1].lastUpdated)
-                        setMileageList(d.mileageInformation)
-                    }
-                })
+                // response.data.data.vehicleInfo.forEach(d => {
+                //     //console.log(d.id)
+                //     if (d.id === id) {
+                //         setLastMileage(d.mileageInformation[d.mileageInformation.length - 1].lastMileage)
+                //         setLastUpdated(d.mileageInformation[d.mileageInformation.length - 1].lastUpdated)
+                //         setMileageList(d.mileageInformation)
+                //     }
+                // })
                 // setLastMileage(response.mileageInformation[response.mileageInformation.length - 1].lastMileage)
                 // setLastUpdated(response.mileageInformation[response.mileageInformation.length - 1].lastUpdated)
                 // setMileageList(response.mileageInformation)
             });
     }, []);
+
+    useEffect(() => {
+        if (oilIsUpdated) {
+            //console.log(typeof mileage)
+            const mileageToInt = Number(mileage)
+            console.log(mileageToInt)
+            updateVehicleMileage(id, {NewMileage: mileageToInt})
+                .then(response => {
+                    //console.log(response.data.currentMileage)
+                    console.log(response)
+                    // setMileage(response.data.currentMileage)
+                    //console.log(response.data.data.vehicleInfo)
+                    // response.data.data.vehicleInfo.forEach(d => {
+                    //     //console.log(d.id)
+                    //     if (d.id === id) {
+                    //         setLastMileage(d.mileageInformation[d.mileageInformation.length - 1].lastMileage)
+                    //         setLastUpdated(d.mileageInformation[d.mileageInformation.length - 1].lastUpdated)
+                    //         setMileageList(d.mileageInformation)
+                    //     }
+                    // })
+                    // setLastMileage(response.mileageInformation[response.mileageInformation.length - 1].lastMileage)
+                    // setLastUpdated(response.mileageInformation[response.mileageInformation.length - 1].lastUpdated)
+                    // setMileageList(response.mileageInformation)
+                });
+        }
+    }, [oilIsUpdated]);
 
     const updateOilLife = () => {
         if (containerStatus) {
@@ -98,35 +127,37 @@ const MileageTracker = ({ data, vehicleInfo }) => {
     };
 
     const updateOilChange = () => {
-        if (Number(mileage) !== 0) {
+        // if (Number(mileage) !== 0) {
 
-            const newMileageObject = {
-                lastUpdated: moment().format('L'),
-                lastMileage: mileage,
-                oilChangeStartInterval: true,
-                oilChangeInterval: oilInterval
-            }
+        //     const newMileageObject = {
+        //         lastUpdated: moment().format('L'),
+        //         lastMileage: mileage,
+        //         oilChangeStartInterval: true,
+        //         oilChangeInterval: oilInterval
+        //     }
 
-            data.mileageInformation.push(newMileageObject);
+        //     data.mileageInformation.push(newMileageObject);
 
-            updateVehicle(id, vehicleInfo, sessionStorage.getItem('userKey'))
-                .then(response => {
-                    response.data.vehicleInfo.forEach(d => {
-                        if (d.id === id) {
-                            setLastMileage(d.mileageInformation[d.mileageInformation.length - 1].lastMileage)
-                            setLastUpdated(d.mileageInformation[d.mileageInformation.length - 1].lastUpdated)
-                            setMileageList(d.mileageInformation)
-                        }
-                    })
-                })
+        //     updateVehicle(id, vehicleInfo, sessionStorage.getItem('userKey'))
+        //         .then(response => {
+        //             response.data.vehicleInfo.forEach(d => {
+        //                 if (d.id === id) {
+        //                     setLastMileage(d.mileageInformation[d.mileageInformation.length - 1].lastMileage)
+        //                     setLastUpdated(d.mileageInformation[d.mileageInformation.length - 1].lastUpdated)
+        //                     setMileageList(d.mileageInformation)
+        //                 }
+        //             })
+        //         })
 
-            // updateVehicle(id, data)
-            //     .then(response => {
-            //         setLastMileage(response.mileageInformation[response.mileageInformation.length - 1].lastMileage)
-            //         setLastUpdated(response.mileageInformation[response.mileageInformation.length - 1].lastUpdated)
-            //         setMileageList(response.mileageInformation)
-            //     });
-        }
+        //     // updateVehicle(id, data)
+        //     //     .then(response => {
+        //     //         setLastMileage(response.mileageInformation[response.mileageInformation.length - 1].lastMileage)
+        //     //         setLastUpdated(response.mileageInformation[response.mileageInformation.length - 1].lastUpdated)
+        //     //         setMileageList(response.mileageInformation)
+        //     //     });
+        // }
+        console.log("test")
+        setoilIsUpdated(true)
     }
 
     const enterUpdateMiles = (miles) => {
@@ -212,9 +243,9 @@ const MileageTracker = ({ data, vehicleInfo }) => {
                 <MileageLeft>
                     <CurrentMileage>
                         <CurrentMileageTitle>Current Mileage:</CurrentMileageTitle>
-                        <CurrentMileageText>{lastMileage}</CurrentMileageText>
+                        <CurrentMileageText>{mileage}</CurrentMileageText>
                     </CurrentMileage>
-                    <LastUpdated>
+                    {/* <LastUpdated>
                         <LastUpdatedTitle>Last Updated</LastUpdatedTitle>
                         <LastUpdatedText>{lastUpdated}</LastUpdatedText>
 
@@ -223,9 +254,9 @@ const MileageTracker = ({ data, vehicleInfo }) => {
                         </MileageButtonContainer>
                         {showMilesContainer()}
 
-                    </LastUpdated>
+                    </LastUpdated> */}
                 </MileageLeft>
-                <MileageRight>
+                {/* <MileageRight>
                     <MileageTitle>Mileage History</MileageTitle>
                     <MileageHistory>
                         {
@@ -236,15 +267,15 @@ const MileageTracker = ({ data, vehicleInfo }) => {
                             })
                         }
                     </MileageHistory>
-                </MileageRight>
+                </MileageRight> */}
             </MileageContainer>
             <OilContainer>
                 <OilTop>
-                    <OilTitle>Oil Life Tracker</OilTitle>
+                    <OilTitle>Oil Life Tracker every {oilInterval} KM</OilTitle>
                 </OilTop>
                 <OilBottom>
                     <OilSubtitle>
-                        <OilLife mileageList={mileageList} oilChangeInterval={oilInterval} />
+                        <OilLife currentMileage={mileage} oilChangeInterval={oilInterval} />
                     </OilSubtitle>
                 </OilBottom>
                 <OilButtonContainer>
