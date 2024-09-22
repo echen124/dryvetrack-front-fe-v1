@@ -24,13 +24,13 @@ const VehicleDetails = ({ year, make, model, color, plate, vin }) => {
                     <Title>Color</Title>
                     <SubText>{color}</SubText>
                 </TextContainer>
-                <TextContainer>
+                {/* <TextContainer>
                     <Title>Plate #</Title>
                     <SubText>{plate}</SubText>
-                </TextContainer>
+                </TextContainer> */}
             </VehicleContainer>
             <VinContainer>
-                <VinTitle>VIN</VinTitle>
+                <VinTitle><b>VIN</b></VinTitle>
                 <VinSubText>{vin}</VinSubText>
             </VinContainer>
         </Container>

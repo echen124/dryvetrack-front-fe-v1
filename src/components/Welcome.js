@@ -11,9 +11,6 @@ const Welcome = ({totalVehicles, totalKilometers, name}) => {
                         Here are the vehicles you are tracking maintenance for. Add new ones at any time!
                     </DescriptionText>
                     <DescriptionText>
-                        Total Kilometers travelled by all vehicles: {totalKilometers}
-                    </DescriptionText>
-                    <DescriptionText>
                         Total # of vehicles: {totalVehicles}
                     </DescriptionText>
                 </Description>

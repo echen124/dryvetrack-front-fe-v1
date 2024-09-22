@@ -1,12 +1,24 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Container, Title, VehicleContainer, LogoContainer, Logo, ButtonContainer, Maintenance, Delete, NameContainer, Make, Model, Year, CarTextContainer, CarTitle, Color, Plate, BottomNameContainer, DirectionsCar } from '../styling/VehicleCard'
+import { getAllVehicles, deleteVehicle, getVehicleByOwnerAndVin, getInsuranceDetails } from '../services/vehicle';
 
 const VehicleCard = ({ data, deleteSingleVehicle }) => {
 
     const test = () => {
         window.location = `/#/vehicle-status/${data.vin}`
     }
+
+    const [plateNum, setPlateNum] = useState("");
+
+    useEffect(() => {
+        getInsuranceDetails(data.vin)
+            .then(response => {
+                setPlateNum(response.data.licensePlate)
+            })
+    }, []);
+
 
     return (
         <Container>
@@ -46,7 +58,11 @@ const VehicleCard = ({ data, deleteSingleVehicle }) => {
                     </Color>
                     <Plate>
                         <CarTitle>Plate #</CarTitle>
-                        <CarTextContainer>{data.plateNumber}</CarTextContainer>
+                        <CarTextContainer>{plateNum}</CarTextContainer>
+                    </Plate>
+                    <Plate>
+                        <CarTitle>odometer</CarTitle>
+                        <CarTextContainer>{data.currentMileage}</CarTextContainer>
                     </Plate>
                 </BottomNameContainer>
             </VehicleContainer>
